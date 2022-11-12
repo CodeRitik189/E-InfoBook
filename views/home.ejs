@@ -1,0 +1,331 @@
+<link rel="stylesheet" href="/css/home.css">
+<style>
+    .post{
+        height:300px;
+        width:500px;
+        border: 2px solid black;
+        margin-left:-50px;
+        margin-top:30px;
+        box-shadow:5px 5px rgba(68, 68, 51, 0.685);
+    }
+    #feed-posts{
+       margin-left:200px;
+    }
+    #homelogin{
+        box-shadow: 10px 10px rgb(39, 39, 119);
+        height:600px;
+        width:500px;
+        margin-left:200px;
+        border:3px solid black;
+        margin-top:20px;
+    }
+    #homeabout{
+        box-shadow: 10px 10px rgb(39, 39, 119);
+        height:600px;
+        width:500px;
+        margin:auto;
+        border:3px solid black;
+    }
+    #homeabout p{
+        text-shadow: 1px 1px rgb(39, 39, 119);
+        font-size:30px;
+    }
+    
+    .loginlist{
+        height:60px;
+        width:400px;
+        margin:auto;
+        margin-top:20px;
+        font-size:40px;
+        text-decoration: none;
+    }
+    .loginput{
+        height:60px;
+        width:400px;
+    }
+    .signup{
+       margin-left:50px;
+       height:60px;
+       width:400px;
+       background-color:rgba(71, 70, 145, 0.589);
+       text-decoration: none;
+       font-size:25px;
+       color:white;
+    }
+    #gosignup{
+        text-decoration: none;
+        text-align: center;
+        text-shadow:0.5px 0.5px rgb(132, 132, 168);
+        margin-top:10px;
+    }
+    .enter{
+       font-size:25px;
+       margin-left:60px;
+       text-shadow: 1px 1px rgb(39, 39, 119);
+    }
+    #new-post-form{
+        height:60px;
+        width:350px;
+        border:1px solid black;
+        box-shadow:5px 5px blue;
+    }
+    #new-post-form-text{
+        height:60px;
+        width:350px;
+    }
+    #sub{
+        margin-left:360px;
+        margin-top:-60px;
+        height:65px;
+        width:130px;
+        background-color:rgba(137, 137, 192, 0.507);
+    }
+    #log{
+        background-color:rgba(137, 137, 192, 0.507);
+        color:white;
+        font-size:24px;
+        text-shadow:0.5px 0.5px rgb(132, 132, 168);
+    }
+     .anch{
+            font-size: 22px;
+            text-decoration: none;
+            margin-left:20px;
+      }
+      .listitem{
+            width:170px;
+            height:40px;
+            background-color: rgba(55, 39, 99, 0.582);
+            font-size: 20px;
+            margin-top:-19px;
+            color:white;
+            border-radius:6%;
+      } 
+      .listheading{
+            width:170px;
+            height:45px;
+            background-color: rgb(40, 26, 78);
+            font-size: 23px;
+            color:white;
+            border-radius:5%;
+      } 
+      .listitem:hover{
+           font-size:22px;
+           color:rgb(1, 1, 31);
+           background-color: rgba(8, 9, 77, 0.637);
+          
+        }
+        .listitem:hover:a{
+          font-size:23px;
+        }
+        .anch{
+          text-decoration: none;
+          color:white;
+        }
+        #posts-list-container ul{
+            list-style-type:none;
+        }
+        .accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+</style>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<div id="home-container">
+    <% if(locals.user){ %>
+    <!-- <section id="feed-posts">
+            <h2>Create Your Own Post</h2>
+            <form action="/posts/create" id="new-post-form" method="POST">
+                <input id="new-post-form-text" name="content" cols="30" rows="3" placeholder="Type Here..." required></input>
+                <input id="sub" type="submit" value="Post">
+            </form>
+            <div id="posts-list-container">
+                <ul>
+                    <% for(post of posts){ %>
+                        
+                    <%- include('_post') -%>
+                        
+                    <%} %>
+                </ul>
+            </div>
+        </section> -->
+        <style>
+            #user-friends{
+                margin-left:100px;
+                position:fixed;
+            }
+            #cont{
+                margin-top:-10px;
+                margin-left:-10px;
+            }
+            #contacts{
+                height:420px;
+                width:405px;
+                overflow:scroll;
+                border:1px solid black;    
+                margin-left: -10px;
+                
+            }
+            #searchbar{
+                margin-left: -455px;
+                margin-top:470px;
+                border-left: 1px solid black;
+                
+            }
+           #add{
+              text-decoration: none;
+           }
+           .inf{
+             text-decoration: none;
+             margin-left:270px;
+           } 
+            
+        </style>
+         
+        
+         <section id="user-friends" style="position:relative;">
+
+            <h4 id = "cont" class="listheading">Your Contacts</h4>
+            <div id="contacts">
+            <% for(u of all_users){%>
+ 
+                    <!-- <a class="anch" href="/users/profile/<%= u.id %>"><%= u.name %></a> -->
+                    <!-- <div className="accordion-item">
+                        <h2 className="accordion-header" id="headingOne">
+                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <%= u.name %>
+                        </button>
+                        </h2>
+                        <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div className="accordion-body">
+                            <strong><%= u.email %></strong><br>
+                             <strong><%= u.name %></strong>
+                        </div>
+                        </div>
+                    </div> -->
+                    
+                     <button class="accordion"><%= u.name %></button>
+                     
+                        <div class="panel">
+                            
+                            <div className="accordion-body">
+                                <strong><%= u.email %></strong><br>
+                                 <strong><%= u.name %></strong><br>
+                                 <strong><%= u.number %></strong><br>
+                                 
+                            </div>
+                            
+                        </div>
+                        
+ 
+            <% } %>
+        </div>
+        </section> 
+
+        <section id = "searchbar">
+            <form class="input-group rounded">
+                <input type="search" action="/" method="GET" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" name = "name" />
+                <button style="height:40px;width:200px;border:solid;" type="submit">Search</button>
+            </form>
+
+            <% if(searched.name != ""){ %>
+             
+                <button class="accordion"><%= searched.name %></button>
+                <div class="panel">
+                    <div className="accordion-body">
+                        <strong><%= searched.email %></strong><br>
+                         <strong><%= searched.name %></strong><br>
+                         <strong><%= searched.number %></strong>
+                    </div>
+                </div>
+                <a id="add" href="/?email=<%= searched.email%>">ADD TO YOUR CONTACTS</a>
+                <!-- <form class="input-group rounded" action="/?email=<%=searched.email %>" method="GET">
+                    <button style="height:30px;width:200px;border:solid;" type="submit">ADD</button>
+                </form> -->
+              
+            <% } %>
+        </section>
+        <section style="margin-left:200px;border-left:1px solid black;width:350px;margin-top:40px;" id="homeab">
+            <h1 style="font-size:30px;">Your Information </h1>
+            <div className="accordion-body">
+                <strong><%= locals.user.email %> </strong><br>
+                 <strong><%=locals.user.name %></strong><br>
+                 <strong><%=locals.user.number %></strong>
+            </div>
+
+            <a  href="/users/profile/<%= user.id %>">edit</a>
+         </section>
+        <% } else {%>
+        <div id="homelogin">
+            <p class="loginlist">Welcome To InfoBook</p>
+
+        <form action="/users/create-session" method="POST">
+         <p class="enter">Enter Email</p>
+         <p class="loginlist"><input class="loginput" type="email" name="email" placeholder="Email"  required></p>
+         <p class="enter">Enter Password</p>
+         <p  class="loginlist"><input class="loginput" type="password" name="password" placeholder="Password"  required></p>
+         <p class="loginlist"><input id="log" class="loginput" type="submit" value="Login"></p>
+        </form>
+        <a id="gosignup" href="/users/sign-up"> <p class="signup">Create Account</p></a>
+    </div>
+    <section id="homeabout">
+       <h1 style="font-size:30px;">About InfoBook</h1>
+       <p>
+           InfoBook is a Web Application where users can store their 
+           Information on a cloud database, social provides a feature using
+           which one can reflect the changes made to it's information 
+           to the others database.
+            <br>          ---Developed By                    
+            <br>        ----Ritik Tripathi
+       </p>
+    </section>
+   <%}%>
+</div>
+
+<!-- importing this script for creating the comments -->
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="/js/home_post_comments.js" ></script>
+<script src="/js/home_posts.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+var i;
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+    // var id1 = document.getElementById('new-post-form-text');
+    // var id2 = document.getElementById('sub');
+    // id2.addEventListener('click',function(){
+    //   //  console.log("value is",id1.value);
+    //    // id1.value="";
+    //    // id1.placeholder="type/here";
+    // });
+</script>
+
